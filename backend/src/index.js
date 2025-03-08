@@ -7,7 +7,7 @@ import authRoute from "./routes/authRoute.js";
 import shipmentRoute from "./routes/shipmentRoute.js";
 const app = express();
 
-const PORT = 5000;
+const PORT = 5001;
 
 dotenv.config();
 

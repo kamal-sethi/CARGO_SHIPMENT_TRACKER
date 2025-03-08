@@ -83,3 +83,28 @@ export const getAllShipments = async (req, res) => {
     });
   }
 };
+
+export const getShipmentById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+    const shipment = await Shipment.findOne({shipmentId: id });
+    console.log(shipment);
+
+    if (shipment) {
+      return res.status(200).json({
+        message: "shipment fetched",
+        shipment,
+      });
+    } else {
+      return res.status(500).json({
+        message: "cannot fetch a shipment",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "error in get shipment by id controller",
+    });
+  }
+};
