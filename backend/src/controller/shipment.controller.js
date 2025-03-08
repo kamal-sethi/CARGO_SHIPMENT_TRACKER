@@ -57,8 +57,29 @@ export const addNewShipmentController = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-        message:"Error in adding new shipment controller"
-    })
+    return res.status(500).json({
+      message: "Error in adding new shipment controller",
+    });
+  }
+};
+
+export const getAllShipments = async (req, res) => {
+  try {
+    const shipments = await Shipment.find({});
+    if (shipments) {
+      return res.status(200).json({
+        message: "fetched all shipments",
+        shipments,
+      });
+    } else {
+      return res.status(500).json({
+        message: "cannot fetch all shipments",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "error in get all shipments controller",
+    });
   }
 };
