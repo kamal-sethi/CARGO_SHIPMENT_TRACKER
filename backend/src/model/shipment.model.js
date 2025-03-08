@@ -30,6 +30,7 @@ const shipmentSchema = new mongoose.Schema(
     currentLocation: {
       type: String,
       default: "Not Updated",
+      required: true,
     },
     shipmentHead: {
       type: String,

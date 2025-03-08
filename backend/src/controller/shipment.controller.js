@@ -88,7 +88,7 @@ export const getShipmentById = async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
-    const shipment = await Shipment.findOne({shipmentId: id });
+    const shipment = await Shipment.findOne({ shipmentId: id });
     console.log(shipment);
 
     if (shipment) {
@@ -105,6 +105,42 @@ export const getShipmentById = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "error in get shipment by id controller",
+    });
+  }
+};
+
+export const updateShipmentById = async (req, res) => {
+  try {
+    const { currentLocation, status } = req.body;
+    const id = req.params.id;
+
+    const shipment = await Shipment.findOne({ shipmentId: id });
+    console.log(shipment);
+    if (!shipment) {
+      return res.status(400).json({
+        message: "no shipment found",
+      });
+    }
+
+    const updateShipment = await Shipment.findByIdAndUpdate(shipment._id, {
+      currentLocation,
+      status,
+    });
+
+    if (updateShipment) {
+      return res.status(201).json({
+        message: "location and status updated successfully",
+        updateShipment,
+      });
+    } else {
+      return res.status(500).json({
+        message: "cannot update shipment",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "error in updating shipment controller",
     });
   }
 };
