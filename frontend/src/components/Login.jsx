@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,8 +15,9 @@ const Login = () => {
         username,
         password,
       });
-      if (user) {
-        console.log("login successfully", user);
+      if (user.data) {
+        toast.success("Logged in Successfully");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -65,6 +69,12 @@ const Login = () => {
           >
             Submit
           </button>
+          <h3 className="text-xl">
+            New User ?{" "}
+            <Link to="/signup">
+              <span className="text-blue-600 font-bold underline">Signup</span>
+            </Link>
+          </h3>
         </form>
       </div>
     </div>

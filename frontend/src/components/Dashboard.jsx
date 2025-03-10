@@ -22,8 +22,11 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      <div className="bg-red-50">
-        <div className="flex flex-col justify-center items-center h-screen  border">
+      <div className="bg-gray">
+        <h1 className="text-2xl font-bold text-center pt-6">
+          Shipment Details
+        </h1>
+        <div className="flex flex-wrap justify-center items-center h-screen border m-5">
           {shipments.map((shipment) => (
             <div className="text-2xl font-bold h-50 w-90 m-3 border ">
               <div className="m-2">
@@ -33,10 +36,25 @@ const Dashboard = () => {
                     {shipment.shipmentName}
                   </span>
                 </h1>
-                <h2> Head:<span className="text-md font-light">{shipment.shipmentHead}</span></h2>
-                <h3>Container Id:<span className="text-md font-light">{shipment.containerId}</span></h3>
-                <h3>Shipment Id:<span className="text-md font-light">{shipment.shipmentId}</span></h3>
-                <h3>ETA:<span className="text-md font-light">{shipment.ETA}</span></h3>
+                <h2>
+                  {" "}
+                  Head:
+                  <span className="text-md font-light">
+                    {shipment.shipmentHead}
+                  </span>
+                </h2>
+                <h3>
+                  Container Id:
+                  <span className="text-md font-light">
+                    {shipment.containerId}
+                  </span>
+                </h3>
+                <h3>
+                  Shipment Id:
+                  <span className="text-md font-light">
+                    {shipment.shipmentId}
+                  </span>
+                </h3>
               </div>
             </div>
           ))}
