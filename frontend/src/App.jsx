@@ -6,6 +6,7 @@ import "./index.css";
 import Dashboard from "./components/Dashboard";
 import AddShipment from "./components/AddShipment";
 import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/add-shipment" element={<AddShipment />} />
       </Routes>
+
+      <Toaster />
     </BrowserRouter>
   );
 };

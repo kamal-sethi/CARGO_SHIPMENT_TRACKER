@@ -1,14 +1,50 @@
 import React, { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddShipment = () => {
   const [shipmentName, setShipmentName] = useState("");
-  const [shipmentId, setShipmentId] = useState();
-  const [containerId, setContainerId] = useState();
-  const [shipmentHead, setShipmentHead] = useState();
-  const [locations, setLocations] = useState([]);
-  const handleSubmit = (e) => {
+  const [shipmentId, setShipmentId] = useState(0);
+  const [containerId, setContainerId] = useState(0);
+  const [shipmentHead, setShipmentHead] = useState("");
+  const [location, setLocations] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(shipmentHead, shipmentId, shipmentName, containerId, locations);
+    console.log(shipmentHead, shipmentId, shipmentName, containerId, location);
+    const newLocations = location.trim()
+      ? location.split(",").map((loc) => loc.trim())
+      : [];
+    console.log(newLocations);
+    console.log({
+      shipmentHead,
+      shipmentId,
+      containerId,
+      location: newLocations,
+      shipmentName,
+    });
+    try {
+      const newShipment = await axios.post(
+        "http://localhost:5001/api/v1/shipment/new",
+        {
+          shipmentName,
+          shipmentId,
+          containerId,
+          locations: newLocations,
+          shipmentHead,
+        }
+      );
+      if (newShipment.data) {
+        console.log("done");
+        toast.success("New Shipment is Created");
+        navigate("/dashboard");
+      } else {
+        console.log("not done");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -41,12 +77,12 @@ const AddShipment = () => {
               Shipment Id
             </label>
             <input
-              type="Number"
+              type="number"
               value={shipmentId}
               id="shipment-id"
               name="shipment-id"
               placeholder="Enter Shipment Id"
-              onChange={(e) => setShipmentId(e.target.value)}
+              onChange={(e) => setShipmentId(Number(e.target.value))}
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-blue-300"
             />
           </div>
@@ -59,12 +95,12 @@ const AddShipment = () => {
               Container Id
             </label>
             <input
-              type="Number"
+              type="number"
               id="container-id"
               name="container-id"
               placeholder="Enter Container Id"
               value={containerId}
-              onChange={(e) => setContainerId(e.target.value)}
+              onChange={(e) => setContainerId(Number(e.target.value))}
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-blue-300"
             ></input>
           </div>
@@ -97,7 +133,7 @@ const AddShipment = () => {
               id="locations"
               name="locations"
               placeholder="Enter Locations"
-              value={locations}
+              value={location}
               onChange={(e) => setLocations(e.target.value)}
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-blue-300"
             ></input>
