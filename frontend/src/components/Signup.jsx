@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [fullname, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,12 +18,13 @@ const Signup = () => {
         "http://localhost:5001/api/v1/auth/signup",
         {
           username,
-          fullname,
+          full_name: fullname,
           password,
         }
       );
-      if (user) {
-        console.log("signup done", user);
+      if (user.data) {
+        toast.success("Account Created");
+        navigate("/dashboard")
       }
     } catch (error) {
       console.log(error.message);
