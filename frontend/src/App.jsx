@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
 import { useSelector } from "react-redux";
+import UpdateShipment from "./components/UpdateShipment.jsx";
 const App = () => {
   // const user = useSelector((state) => state.user.user);
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/add-shipment" element={<AddShipment />} />
+          <Route path="/update-shipment/:id" element={<UpdateShipment/>}/>
         </Routes>
 
         <Toaster />

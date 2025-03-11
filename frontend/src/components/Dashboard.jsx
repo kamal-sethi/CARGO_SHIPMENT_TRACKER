@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [shipments, setShipments] = useState([]);
@@ -28,35 +29,37 @@ const Dashboard = () => {
         </h1>
         <div className="flex flex-wrap justify-center items-center h-screen  m-5">
           {shipments.map((shipment) => (
-            <div className="text-2xl font-bold h-50 w-90 m-3 border-2 rounded-lg border-indigo-500/50 ">
-              <div className="m-2">
-                <h1>
-                  Shipment Name:
-                  <span className="text-md font-light">
-                    {shipment.shipmentName}
-                  </span>
-                </h1>
-                <h2>
-                  {" "}
-                  Head:
-                  <span className="text-md font-light">
-                    {shipment.shipmentHead}
-                  </span>
-                </h2>
-                <h3>
-                  Container Id:
-                  <span className="text-md font-light">
-                    {shipment.containerId}
-                  </span>
-                </h3>
-                <h3>
-                  Shipment Id:
-                  <span className="text-md font-light">
-                    {shipment.shipmentId}
-                  </span>
-                </h3>
+            <Link to={`/update-shipment/${shipment.shipmentId}`}>
+              <div className="text-2xl font-bold h-50 w-90 m-3 border-2 rounded-lg border-indigo-500/50 ">
+                <div className="m-2">
+                  <h1>
+                    Shipment Name:
+                    <span className="text-md font-light">
+                      {shipment.shipmentName}
+                    </span>
+                  </h1>
+                  <h2>
+                    {" "}
+                    Head:
+                    <span className="text-md font-light">
+                      {shipment.shipmentHead}
+                    </span>
+                  </h2>
+                  <h3>
+                    Container Id:
+                    <span className="text-md font-light">
+                      {shipment.containerId}
+                    </span>
+                  </h3>
+                  <h3>
+                    Shipment Id:
+                    <span className="text-md font-light">
+                      {shipment.shipmentId}
+                    </span>
+                  </h3>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
