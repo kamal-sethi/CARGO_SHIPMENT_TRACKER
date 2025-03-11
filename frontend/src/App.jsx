@@ -7,19 +7,23 @@ import Dashboard from "./components/Dashboard";
 import AddShipment from "./components/AddShipment";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
-
+import { store } from "./redux/store.js";
+import { Provider } from "react-redux";
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/navbar" element={<Navbar />} />
-        <Route path="/add-shipment" element={<AddShipment />} />
-      </Routes>
+      <Provider store={store}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
-      <Toaster />
+          <Route path="/add-shipment" element={<AddShipment />} />
+        </Routes>
+
+        <Toaster />
+      </Provider>
     </BrowserRouter>
   );
 };

@@ -23,12 +23,12 @@ const Dashboard = () => {
   return (
     <>
       <div className="bg-gray">
-        <h1 className="text-2xl font-bold text-center pt-6">
+        <h1 className="text-2xl font-bold text-center pt-6 ">
           Shipment Details
         </h1>
-        <div className="flex flex-wrap justify-center items-center h-screen border m-5">
+        <div className="flex flex-wrap justify-center items-center h-screen  m-5">
           {shipments.map((shipment) => (
-            <div className="text-2xl font-bold h-50 w-90 m-3 border ">
+            <div className="text-2xl font-bold h-50 w-90 m-3 border-2 rounded-lg border-indigo-500/50 ">
               <div className="m-2">
                 <h1>
                   Shipment Name:
