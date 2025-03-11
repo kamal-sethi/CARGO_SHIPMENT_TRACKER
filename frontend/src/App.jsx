@@ -9,7 +9,9 @@ import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 const App = () => {
+  // const user = useSelector((state) => state.user.user);
   return (
     <BrowserRouter>
       <Provider store={store}>
